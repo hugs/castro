@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>vnc2swf - Screen Recorder</title>
+</head>
+
+<body>
+<h2>
+vnc2swf<br>
+Screen Recorder
+</h2>
+<p class=nav>
+<a href="http://www.unixuser.org/~euske/vnc2swf/index.html">Homepage</a>
+<a href="index-j.html">[Japanese]</a>
+
+<p>
+Vnc2swf is a cross-platform screen recording tool for ShockWave Flash (swf) or Flash Video (flv) format.
+
+<h4>Download:</h4>
+<p>
+<table><tr>
+<td><strong><a href="pyvnc2swf.html">Python version</a>:</strong></td> 
+<td>(Nov 15, 2008) <code>pyvnc2swf-0.9.5</code></td>
+<td><a href="http://www.unixuser.org/~euske/vnc2swf/pyvnc2swf-0.9.5.tar.gz"><strong>tar.gz</strong></a> or
+    <a href="http://www.unixuser.org/~euske/vnc2swf/pyvnc2swf-0.9.5.zip"><strong>zip</strong></a> or
+    <a href="http://davidf.sjsoft.com/files/pyvnc2swf/"><strong>RPM/Win32</strong></a>
+</a></td>
+</tr><tr>
+<td><strong><a href="http://www.unixuser.org/~euske/vnc2swf/vnc2swf.html">C version</a>:</strong></td>
+<td>(Oct 29, 2005) <code>vnc2swf-0.5.0</code></td>
+<td><a href="http://www.unixuser.org/~euske/vnc2swf/vnc2swf-0.5.0.tar.gz"><strong>tar.gz</strong></a> or
+    <a href="http://dag.wieers.com/packages/vnc2swf/"><strong>RPM</strong></a>
+</a></td>
+<td>&nbsp; <a href="#diff"><small>What is the difference?</small></a></td>
+</tr></table>
+
+
+
+<h4>Questions or Comments:</h4>
+<p>
+Write to
+<a href="mailto:vnc2swf-users@lists.sourceforge.net">vnc2swf-users@lists.sourceforge.net</a>.
+(Here is <a href="http://sourceforge.net/mailarchive/forum.php?forum=vnc2swf-users">the archive</a>
+and <a href="http://lists.sourceforge.net/lists/listinfo/vnc2swf-users">how to subscribe</a>)
+
+<p>
+<a href="changes.html">Recent changes</a>
+
+<hr noshade size="2">
+<h3>Sample Movie</h3>
+<ul>
+  <li> <a href="gnomine2.html">Gnomine</a> (250KBytes, with audio)
+       <a href="gnomine.html">(original version)</a>
+  <li> <a href="emacs.html">Emacs</a> (300KBytes)
+  <li> <a href="macosx2.html">Mac OS X</a> (5MBytes)
+  <li> <a href="howto-vnc2swf-windows.html">Windows 2000</a> (2.2MBytes, with audio)
+  <li> <a href="slime.html">SLIME on Linux</a> (1.3MBytes, with audio)
+  <li> <a href="http://www.google.com/search?q=generated-by-pyvnc2swf">Others...</a>
+</ul>
+
+<a name="faq"></a>
+<hr noshade size="2">
+<h3>Frequently Asked Questions</h3>
+
+<a name="diff"></a>
+<h4>What's the difference between Python version and C version?</h4>
+<p>
+Vnc2swf comes with two different implementations: 
+<ul>
+<li> <strong>Python version (pyvnc2swf)</strong>:
+<ul>
+<li> Runs on many platforms, including Linux, FreeBSD, Solaris, Mac OS X, and Windows.
+<li> Has more functions (e.g. editing, adding a seekbar).
+<li> Is being actively developed.
+</ul>
+<li> <strong>C version (vnc2swf)</strong>: 
+<ul>
+<li> Only runs on platforms which support X11 (i.e. Unix, Linux or Mac OS X).
+<br> <strong>NOTE: The latest version no longer needs Ming.</strong>
+<li> Has a vnc viewer.
+<li> Simple and lightweight.
+</ul>
+</ul>
+
+<p>
+For both versions, you need to install at least one VNC server:
+<ul>
+<li> <a href="http://www.realvnc.com/">XVnc</a>,
+<li> <a href="http://www.realvnc.com/winvnc.html">WinVNC</a>,
+<li> <a href="http://www.tightvnc.com/">TightVNC</a>,
+<li> <a href="http://www.redstonesoftware.com/vnc.html">OSXVnc</a>,
+<li> <a href="http://www.karlrunge.com/x11vnc/">x11vnc</a>, 
+or
+<li> GNOME Remote Desktop (Vino)
+</ul>
+
+<p>
+Additionally, for Python version, you need Python and Pygame package.
+For more information, see <a href="pyvnc2swf.html">pyvnc2swf</a> page.
+
+<h4>Output movies are garbled!</h4>
+<p>
+Several users reported they had a garbled movie when they used
+ATI binary drivers for the X server. Please switch to the open source one.
+
+
+<h4>Could you add this new feature?</h4>
+<p>
+Recently I've received lots of feature requests.
+Unfortunately, some of them are hard to implement because
+of the nature of this software, including:
+<ul>
+<li> Recording mouse click. (VNC doesn't send mouse click information)
+<li> Recording key stroke. (VNC doesn't send this, too)
+<li> Supporting OGG format instead of MP3. (SWF file doesn't support this.)
+</ul>
+
+
+<hr noshade size="2">
+<h3>License</h3>
+<p> Vnc2swf comes with ABSOLUTELY NO WARRANTY.
+This software is distributed under the GNU General Public License.
+
+
+<hr noshade size="2">
+<h3>Author</h3>
+<p>Yusuke Shinyama <img src="../address.png">
+(For questions or comments, please write to
+<a href="http://lists.sourceforge.net/lists/listinfo/vnc2swf-users">the mailing list</a>
+so that we can share them!)
+
+
+<hr noshade size="2">
+<h3>Links</h3>
+<ul>
+  <li> <a href="http://www.realvnc.com/">RealVNC</a>
+  <li> <a href="http://www.tightvnc.com/">TightVNC</a>
+  <li> <a href="http://ultravnc.sourceforge.net/">UltraVNC</a>
+  <li> <a href="http://www.macromedia.com/software/flash/">Macromedia Flash</a>
+  <li> <a href="http://gplflash.sourceforge.net/">GPLFlash</a>
+  <li> <a href="http://www.karlrunge.com/x11vnc/">x11vnc</a>
+  <li> <a href="http://www.sodan.org/~penny/vncrec/">Vncrec</a>
+  <li> <a href="http://freshmeat.net/projects/vnc2swf/">FreshMeat vnc2swf project page</a>
+  <li> <a href="http://sourceforge.net/projects/vnc2swf/">Sourceforge vnc2swf project page</a>
+       (<a href="http://cvs.sourceforge.net/viewcvs.py/vnc2swf/">Browse CVS</a>)
+</ul>
+
+
+<hr noshade size="2">
+<p>
+<!-- hhmts start -->
+Last Modified: Sun Nov 16 11:55:13 JST 2008
+<!-- hhmts end -->
+<address>Yusuke Shinyama</address>
+</body>
+</html>
