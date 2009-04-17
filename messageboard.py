@@ -1,9 +1,12 @@
 import os
 import simplejson as json
+import tempfile
 
 class MessageBoard:
     def __init__(self, filename):
-        self.filepath = os.path.join ('./store',
+        storage_dir = os.environ.get('CASTRO_DATA_DIR',
+                                     tempfile.gettempdir())
+        self.filepath = os.path.join (storage_dir,
                                       'messageboard-%s' % filename)
         open(self.filepath,'a').close()
 
