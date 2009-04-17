@@ -470,11 +470,11 @@ class RFBProxy:
 
   # JRH - castro - begin
   def set_loop(self):
-    mb.loop.write(True)
+    mb.recording_should_continue.write(True)
     self.do_another_loop = True
 
   def get_loop(self):
-    self.do_another_loop = mb.loop.read()
+    self.do_another_loop = mb.recording_should_continue.read()
     return self.do_another_loop
 
   #def loop(self):

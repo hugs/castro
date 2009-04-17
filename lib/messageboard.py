@@ -7,7 +7,7 @@ class MessageBoard:
         storage_dir = os.environ.get('CASTRO_DATA_DIR',
                                      tempfile.gettempdir())
         self.filepath = os.path.join (storage_dir,
-                                      'messageboard-%s' % filename)
+                                      'castro-messageboard-%s' % filename)
         open(self.filepath,'a').close()
 
     def write(self, writable):
@@ -27,4 +27,4 @@ class MessageBoard:
             readable = None 
         return readable
 
-loop = MessageBoard('loop.txt')
+recording_should_continue = MessageBoard('recording_should_continue.txt')

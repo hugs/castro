@@ -25,7 +25,7 @@ def start():
     vnc.start()
 
 def stop():
-    mb.loop.write(False)
+    mb.recording_should_continue.write(False)
 
 def restart():
     stop()
