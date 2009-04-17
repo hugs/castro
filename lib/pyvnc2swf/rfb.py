@@ -30,6 +30,9 @@ import sys, time, socket
 from struct import pack, unpack
 from d3des import decrypt_passwd, generate_response
 from image import IMG_SOLID, IMG_RAW
+# JRH - castro - begin
+import messageboard as mb
+# JRH - castro - end
 stderr = sys.stderr
 lowerbound = max
 
@@ -465,11 +468,29 @@ class RFBProxy:
 
     return True
 
+  # JRH - castro - begin
+  def set_loop(self):
+    mb.loop.write(True)
+    self.do_another_loop = True
+
+  def get_loop(self):
+    self.do_another_loop = mb.loop.read()
+    return self.do_another_loop
+
+  #def loop(self):
+  #  while self.loop1():
+  #    pass
+  #  self.finish_update()
+  #  return self
+
   def loop(self):
-    while self.loop1():
-      pass
+    self.set_loop()
+    while self.do_another_loop == True:
+      if not self.loop1(): break
+      self.get_loop()
     self.finish_update()
     return self
+  # JRH - castro - end
 
   def close(self):
     if self.fb:
