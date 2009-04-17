@@ -1,7 +1,7 @@
 import os
-import sys
 import tempfile
-import time
+from sys import stdout 
+from time import sleep
 
 from processing import Process
 
@@ -9,20 +9,20 @@ import lib.messageboard as mb
 from lib.pyvnc2swf import vnc2swf
 
 # Get directory for storing files:
-storage_dir = os.environ.get('CASTRO_DATA_DIR',
+_storage_dir = os.environ.get('CASTRO_DATA_DIR',
                              tempfile.gettempdir()) 
 #
 # Public functions
 #
 def init():
-    global vnc
-    vnc = Process(target= vnc2swf.main, args=[[
+    global recorder
+    recorder = Process(target= vnc2swf.main, args=[[
                         'lib/pyvnc2swf/vnc2swf.py', 
                         '-n', 
-                        '-o', os.path.join(storage_dir, 'video.swf'),
+                        '-o', os.path.join(_storage_dir, 'castro-video.swf'),
                         'localhost:0']])
 def start():
-    vnc.start()
+    recorder.start()
 
 def stop():
     mb.recording_should_continue.write(False)
@@ -32,20 +32,24 @@ def restart():
     init()
     start()
 
-# Create some dummy output during a test
-def _make_some_test_output():
-    sys.stdout.write("\nRecording a 10 second video...\n\n")
-    for i in range(11):
-        sys.stdout.write("%s " % i)
-        sys.stdout.flush()
-        time.sleep(1)
-    sys.stdout.write("\n")
+#
+# Private functions
+#
 
-def test():
+# Show some output on screen during a test
+def _countdown_timer():
+    stdout.write("\nRecording a 10 second video...\n\n")
+    for i in range(10,0,-1):
+        stdout.write("%s " % i)
+        stdout.flush()
+        sleep(1)
+    stdout.write("\n")
+
+def _test():
     init()
     start()
-    _make_some_test_output()
+    _countdown_timer()
     stop()
 
 if __name__ == '__main__':
-    test()
+    _test()
