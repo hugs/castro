@@ -31,7 +31,7 @@ from struct import pack, unpack
 from d3des import decrypt_passwd, generate_response
 from image import IMG_SOLID, IMG_RAW
 # JRH - castro - begin
-import messageboard as mb
+from .. import messageboard as mb
 # JRH - castro - end
 stderr = sys.stderr
 lowerbound = max

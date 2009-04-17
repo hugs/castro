@@ -5,7 +5,7 @@ import time
 
 from processing import Process, Queue
 
-import messageboard as mb
+import lib.messageboard as mb
 from lib.pyvnc2swf import vnc2swf
 
 # Get directory for storing files:
