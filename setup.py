@@ -18,8 +18,7 @@ Here's an example::
 
     >>> from castro import Castro
     >>> c = Castro()
-    >>> c.start()
-    >>> # Do something awesome!
+    >>> c.start() >>> # Do something awesome!
     >>> c.stop()
 
 -------
@@ -122,7 +121,7 @@ Dependencies
       install_requires=[
           # -*- Extra requirements: -*-
           'processing',
-          'pygame'
+          'pygame',
           'setuptools',
           'simplejson',
       ],
