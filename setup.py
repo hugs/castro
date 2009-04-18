@@ -57,6 +57,7 @@ Castro is a library for recording automated screencasts.
       install_requires=[
           # -*- Extra requirements: -*-
           'processing',
+          'pygame'
           'setuptools',
           'simplejson',
       ],
