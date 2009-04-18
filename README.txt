@@ -3,7 +3,7 @@
 
 Install:
     1) Install and launch a vncserver. (Hint: Google it.)
-    2) $ easy_install castro [TODO: Make this work!]
+    2) $ sudo easy_install --always-unzip castro [TODO: Make this work!]
     3) There's no step 3!
 
 Test:
@@ -45,6 +45,7 @@ Use:
     Specify everything:
         $ export CASTRO_DATA_DIR=/home/me/screencasts 
         $ python
+        >>> from castro import Castro
         >>> c = Castro(host     = 'example.com',
                        display  = 1,
                        filename = "my-cool-screencast.swf",
