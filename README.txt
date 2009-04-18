@@ -1,0 +1,52 @@
+# Castro - screen/cast ro/bot
+# A tiny fork of pyvnc2swf, with a smidge of awesome on the side
+
+Install:
+    1) Install and launch a vncserver. (Hint: Google it.)
+    2) $ easy_install castro [TODO: Make this work!]
+    3) There's no step 3!
+
+Test:
+    $ python -c "import castro; castro.test()"
+
+Watch:
+    Video stored in: <default_temp_dir>/castro-video.swf
+    Video player stored in: <default_temp_dir>/castro-video.html
+    
+    Linux/OSX:
+        $ firefox /tmp/castro-video.html
+
+    Windows:
+        C:/> firefox.exe ???/castro-video.html     
+
+Use:
+    The Happy Path:
+        >>> from castro import Castro
+        >>> c = Castro()
+        >>> c.start()
+        >>> # Do something awesome! 
+        >>> c.stop()
+      
+    Host and display:
+        (default is localhost:0)
+        >>> c = Castro(host='example.com', display=1)
+
+    Storage directory:
+        $ export CASTRO_DATA_DIR=/home/me/screencasts 
+
+    Filename:
+        (default is "castro-video.swf")
+        >>> c = Castro(filename = "my-cool-screencast.swf")
+
+    VNC password file:
+        (default is "~/.vnc/passwd")
+        >>> c = Castro(passwd = "/home/me/.vnc/passwd")
+
+    Specify everything:
+        $ export CASTRO_DATA_DIR=/home/me/screencasts 
+        $ python
+        >>> c = Castro(host     = 'example.com',
+                       display  = 1,
+                       filename = "my-cool-screencast.swf",
+                       passwd   = "/home/me/.vnc/passwd")
+
