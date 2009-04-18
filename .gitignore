@@ -2,3 +2,6 @@
 *.log
 *.pid
 *.swp
+build
+dist
+castro.egg-info
