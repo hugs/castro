@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.0'
+version = '1.0.1'
 
 setup(name='castro',
       version=version,
@@ -95,6 +95,16 @@ Dependencies
 * Processing - 0.52 or above
 
 * Simplejson - 2.0.9 or above
+
+
+------------
+Changelog:
+------------
+
+* 1.0.1 - Fixed default vnc password path
+
+* 1.0 -  First Release
+
 
 """,
       # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
