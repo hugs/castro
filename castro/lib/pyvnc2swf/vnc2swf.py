@@ -399,6 +399,7 @@ def vnc2swf(info, outtype='swf5', host='localhost', port=5900,
             debug=0, merge=False):
   fp = None
   if outtype == 'vnc':
+    stream = None
     if info.filename == '-':
       fp = sys.stdout
     else:
@@ -436,7 +437,8 @@ def vnc2swf(info, outtype='swf5', host='localhost', port=5900,
   if subprocess:
     subprocess.stop()
   client.close()
-  stream.close()
+  if stream:
+    stream.close()
   info.write_html()
   if fp:
     fp.close()
