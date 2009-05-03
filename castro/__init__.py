@@ -17,10 +17,12 @@ class Castro:
                  filename = "castro-video.swf",
                  host     = "localhost",
                  display  = 0,
+                 clipping = None,
                  passwd   = os.path.join(os.path.expanduser("~"), ".vnc", "passwd")):
         s.filename = filename
         s.host = host
         s.display = display
+        s.clipping = clipping
         s.passwd = passwd
         s.init()
 
@@ -34,6 +36,11 @@ class Castro:
         if s.passwd:
             args.insert(4, '-P')
             args.insert(5, s.passwd)
+
+        # If clipping is specified, insert it into args
+        if s.clipping:
+            args.insert(4, '-C')
+            args.insert(5, s.clipping)
 
         s.recorder = Process(target= vnc2swf.main, args=[args])
 
