@@ -49,6 +49,7 @@ class Castro:
 
     def stop(s):
         mb.recording_should_continue.write(False)
+        s.recorder.join()
 
     def restart(s):
         s.stop()
