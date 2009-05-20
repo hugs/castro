@@ -55,6 +55,17 @@ class Castro:
         s.init()
         s.start()
 
+# To be used with a "with" statement
+class video:
+    def __init__(s, *args, **kwargs):
+        s.recorder = Castro(*args, **kwargs)
+    
+    def __enter__(s):
+        s.recorder.start()
+    
+    def __exit__(s, type, value, traceback):
+        s.recorder.stop()
+
 # Show some output on screen during a test
 def countdown_timer():
     stdout.write("\nRecording a 10 second video...\n\n")
