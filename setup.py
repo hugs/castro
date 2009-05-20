@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.0.1'
+version = '1.0.2'
 
 setup(name='castro',
       version=version,
@@ -100,10 +100,12 @@ Dependencies
 ------------
 Changelog:
 ------------
+* 1.0.2 - Made stop() block until the recording process is done
+          Added support to use Castro in a with statement (e.g "with video(...):")
 
 * 1.0.1 - Fixed default vnc password path
 
-* 1.0 -  First Release
+* 1.0   - First Release
 
 
 """,
