@@ -42,7 +42,7 @@ def bgr2rgb(data):
 try:
   # try to pygame 1.6 or newer.
   import pygame
-  print >>sys.stderr, 'Using pygame', pygame.ver
+  #print >>sys.stderr, 'Using pygame', pygame.ver
   pygame.init()
   try:
     pygame.mixer.quit()

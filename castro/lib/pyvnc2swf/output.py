@@ -727,7 +727,7 @@ class ImageSequenceStream(MovieOutputStream):
 try:
   import pymedia
   from pymedia.video import vcodec
-  print >>stderr, 'Using pymedia', pymedia.__version__
+  #print >>stderr, 'Using pymedia', pymedia.__version__
 except ImportError:
   vcodec = None
 class MPEGVideoStream(MovieOutputStream):
