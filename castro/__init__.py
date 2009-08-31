@@ -17,11 +17,13 @@ class Castro:
                  filename = "castro-video.swf",
                  host     = "localhost",
                  display  = 0,
+                 framerate = '12',
                  clipping = None,
                  passwd   = os.path.join(os.path.expanduser("~"), ".vnc", "passwd")):
         s.filename = filename
         s.host = host
         s.display = display
+        s.framerate = framerate
         s.clipping = clipping
         s.passwd = passwd
         s.init()
@@ -36,6 +38,11 @@ class Castro:
         if s.passwd:
             args.insert(4, '-P')
             args.insert(5, s.passwd)
+
+        # If framerate is specified, insert it into args
+        if s.framerate:
+            args.insert(4, '-r')
+            args.insert(5, s.framerate)
 
         # If clipping is specified, insert it into args
         if s.clipping:
