@@ -17,7 +17,7 @@ class Castro:
                  filename = "castro-video.swf",
                  host     = "localhost",
                  display  = 0,
-                 framerate = '12',
+                 framerate = 12,
                  clipping = None,
                  passwd   = os.path.join(os.path.expanduser("~"), ".vnc", "passwd")):
         s.filename = filename
