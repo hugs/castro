@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.0.2'
+version = '1.0.3'
 
 setup(name='castro',
       version=version,
@@ -18,7 +18,8 @@ Here's an example::
 
     >>> from castro import Castro
     >>> c = Castro()
-    >>> c.start() >>> # Do something awesome!
+    >>> c.start()
+    >>> # Do something awesome!
     >>> c.stop()
 
 -------
@@ -92,7 +93,7 @@ Dependencies
 
 * Pygame - 1.6 or above
 
-* Processing - 0.52 or above
+* Multiprocessing - 2.6.21 or above
 
 * Simplejson - 2.0.9 or above
 
@@ -100,6 +101,9 @@ Dependencies
 ------------
 Changelog:
 ------------
+* 1.0.3 - Switched from processing library to multiprocessing.
+          Added support for changing recording framerate. 
+
 * 1.0.2 - Made stop() block until the recording process is done
           Added support to use Castro in a with statement (e.g "with video(...):")
 
@@ -132,7 +136,7 @@ Changelog:
       zip_safe=False,
       install_requires=[
           # -*- Extra requirements: -*-
-          'processing',
+          'multiprocessing',
           'pygame',
           'setuptools',
           'simplejson',
