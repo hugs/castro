@@ -3,7 +3,7 @@ import tempfile
 from sys import stdout 
 from time import sleep
 
-from processing import Process
+from multiprocessing import Process
 
 import lib.messageboard as mb
 from lib.pyvnc2swf import vnc2swf
