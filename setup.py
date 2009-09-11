@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.0.3'
+version = '1.0.4'
 
 setup(name='castro',
       version=version,
@@ -140,6 +140,7 @@ Changelog:
           'pygame',
           'setuptools',
           'simplejson',
+          'PyYAML',
       ],
       entry_points="""
       # -*- Entry points: -*-
