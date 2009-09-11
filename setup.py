@@ -99,7 +99,8 @@ Dependencies
 
 * PyYAML - 3.09 or above
 
-Non-python dependences (for post-processing .flv videos):
+  Non-python dependences (for cleaning/editing .flv videos):
+
 * flvtool2 (ruby gem) 
 
 * ffmpeg 
