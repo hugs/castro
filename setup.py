@@ -97,6 +97,13 @@ Dependencies
 
 * Simplejson - 2.0.9 or above
 
+* PyYAML - 3.09 or above
+
+Non-python dependences (for post-processing .flv videos):
+* flvtool2 (ruby gem) 
+
+* ffmpeg 
+
 
 ------------
 Changelog:
