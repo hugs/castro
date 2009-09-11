@@ -101,6 +101,8 @@ Dependencies
 ------------
 Changelog:
 ------------
+* 1.0.4 - Added post-recording processing methods. (Depends on ffmpeg and flvtool2)
+
 * 1.0.3 - Switched from processing library to multiprocessing.
           Added support for changing recording framerate. 
 
