@@ -2,12 +2,7 @@ from setuptools import setup, find_packages
 import sys, os
 
 version = '1.0.4'
-
-setup(name='castro',
-      version=version,
-      description="Screencasting library",
-      long_description="""\
-
+long_description='''
 ------------
 Introduction
 ------------
@@ -120,9 +115,26 @@ Changelog:
 * 1.0.1 - Fixed default vnc password path
 
 * 1.0   - First Release
+'''
 
+install_requires = [
+          # -*- Extra requirements: -*-
+          'pygame',
+          'setuptools',
+          'PyYAML',
+]
 
-""",
+# Python < 2.5 need some more
+if float("%s.%s" % sys.version_info[:2]) < 2.6:
+    install_requires.extend([
+      'multiprocessing',
+      'simplejson',
+    ])
+
+setup(name='castro',
+      version=version,
+      description="Screencasting library",
+      long_description=long_description,
       # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
           'Development Status :: 4 - Beta',
@@ -144,15 +156,8 @@ Changelog:
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          # -*- Extra requirements: -*-
-          'multiprocessing',
-          'pygame',
-          'setuptools',
-          'simplejson',
-          'PyYAML',
-      ],
+      install_requires=install_requires,
       entry_points="""
       # -*- Entry points: -*-
       """,
-      )
+)
