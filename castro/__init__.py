@@ -14,89 +14,89 @@ from lib.pyvnc2swf import vnc2swf
 DATA_DIR = os.environ.get('CASTRO_DATA_DIR', None) or tempfile.gettempdir()
 
 class Castro:
-    def __init__(s,
+    def __init__(self,
                  filename = "castro-video.swf",
                  host     = "localhost",
                  display  = 0,
                  framerate = 12,
                  clipping = None,
                  passwd   = os.path.join(os.path.expanduser("~"), ".vnc", "passwd")):
-        s.filename = filename
-        s.filepath = os.path.join(DATA_DIR, s.filename)
-        s.host = host
-        s.display = display
-        s.framerate = framerate
-        s.clipping = clipping
-        s.passwd = passwd
+        self.filename = filename
+        self.filepath = os.path.join(DATA_DIR, self.filename)
+        self.host = host
+        self.display = display
+        self.framerate = framerate
+        self.clipping = clipping
+        self.passwd = passwd
         
         # Post-process data: 
-        s.duration = 0        
-        s.tempfilepath = os.path.join(DATA_DIR, 'temp-' + s.filename)
-        s.cuefilepath = os.path.join(DATA_DIR, s.filename + "-cuepoints.xml")
+        self.duration = 0        
+        self.tempfilepath = os.path.join(DATA_DIR, 'temp-' + self.filename)
+        self.cuefilepath = os.path.join(DATA_DIR, self.filename + "-cuepoints.xml")
 
         # Finally...
-        s.init()
+        self.init()
 
-    def init(s):
+    def init(self):
         args=['lib/pyvnc2swf/vnc2swf.py',
                '-n',
-               '-o', s.filepath,
-               '%s:%s' % (s.host, s.display) ]
+               '-o', self.filepath,
+               '%s:%s' % (self.host, self.display) ]
 
         # If password file is specified, insert it into args
-        if s.passwd:
+        if self.passwd:
             args.insert(4, '-P')
-            args.insert(5, s.passwd)
+            args.insert(5, self.passwd)
 
         # If framerate is specified, insert it into args
-        if s.framerate:
+        if self.framerate:
             args.insert(4, '-r')
-            args.insert(5, s.framerate)
+            args.insert(5, self.framerate)
 
         # If clipping is specified, insert it into args
-        if s.clipping:
+        if self.clipping:
             args.insert(4, '-C')
-            args.insert(5, s.clipping)
+            args.insert(5, self.clipping)
 
-        s.recorder = Process(target= vnc2swf.main, args=[args])
+        self.recorder = Process(target= vnc2swf.main, args=[args])
 
-    def start(s):
-        s.recorder.start()
+    def start(self):
+        self.recorder.start()
 
-    def stop(s):
+    def stop(self):
         mb.recording_should_continue.write(False)
-        s.recorder.join()
+        self.recorder.join()
 
-    def restart(s):
-        s.stop()
-        s.init()
-        s.start()
+    def restart(self):
+        self.stop()
+        self.init()
+        self.start()
 
-    def process(s):
-        s.keyframe()
-        s.calc_duration()
-        s.cuepoint()
-        s.inject_metadata()
-        s.cleanup()
+    def process(self):
+        self.keyframe()
+        self.calc_duration()
+        self.cuepoint()
+        self.inject_metadata()
+        self.cleanup()
 
-    def keyframe(s):
+    def keyframe(self):
         print "Running ffmpeg: creating keyframes"
         os.system("ffmpeg -y -i %s -g %s -sameq %s" %
-          (s.filepath,
-           s.framerate,
-           s.tempfilepath))
+          (self.filepath,
+           self.framerate,
+           self.tempfilepath))
 
-    def calc_duration(s):
+    def calc_duration(self):
         print "Getting Duration:"  
-        flv_data_raw = os.popen("flvtool2 -P %s" % s.tempfilepath).read()
+        flv_data_raw = os.popen("flvtool2 -P %s" % self.tempfilepath).read()
         flv_data = yaml.load(flv_data_raw)
-        s.duration = int(round(flv_data[flv_data.keys()[0]]['duration']))
-        print "Duration: %s" % s.duration
+        self.duration = int(round(flv_data[flv_data.keys()[0]]['duration']))
+        print "Duration: %s" % self.duration
 
-    def cuepoint(s):
+    def cuepoint(self):
         print "\n\nCreating cuepoints:"
         # Create the cuepoints file
-        cuefile = open(s.cuefilepath,'w')
+        cuefile = open(self.cuefilepath,'w')
 
         # Write the header
         cuefile.write ("<?xml version=\"1.0\"?>\n")
@@ -104,7 +104,7 @@ class Castro:
         cuefile.write ("  <!-- navigation cue points -->\n")
 
         # Write the body
-        for i in range(0,s.duration,1):
+        for i in range(0,self.duration,1):
             name = (datetime(1900,1,1,0,0,0) + timedelta(seconds=i)).strftime('%H:%M:%S')
             cuefile.write ("  <metatag event=\"onCuePoint\">\n")
             cuefile.write ("    <name>%s</name>\n" % name)
@@ -117,27 +117,27 @@ class Castro:
         cuefile.write ("</tags>\n")
         cuefile.close()
 
-    def inject_metadata(s):
+    def inject_metadata(self):
         os.system("flvtool2 -AUt %s %s %s" %
-            (s.cuefilepath,
-             s.tempfilepath,
-             s.filepath))
+            (self.cuefilepath,
+             self.tempfilepath,
+             self.filepath))
 
-    def cleanup(s):
-        os.remove(s.cuefilepath)
-        os.remove(s.tempfilepath)
+    def cleanup(self):
+        os.remove(self.cuefilepath)
+        os.remove(self.tempfilepath)
 
 
 # To be used with a "with" statement
 class video:
-    def __init__(s, *args, **kwargs):
-        s.recorder = Castro(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        self.recorder = Castro(*args, **kwargs)
     
-    def __enter__(s):
-        s.recorder.start()
+    def __enter__(self):
+        self.recorder.start()
     
-    def __exit__(s, type, value, traceback):
-        s.recorder.stop()
+    def __exit__(self, type, value, traceback):
+        self.recorder.stop()
 
 # Show some output on screen during a test
 def countdown_timer():
