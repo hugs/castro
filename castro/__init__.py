@@ -1,7 +1,7 @@
 import os
 import tempfile
 from datetime import datetime, timedelta
-from sys import stdout 
+from sys import stdout
 from time import sleep
 
 from multiprocessing import Process
@@ -11,11 +11,10 @@ import lib.messageboard as mb
 from lib.pyvnc2swf import vnc2swf
 
 # Get directory for storing files:
-DATA_DIR = os.environ.get('CASTRO_DATA_DIR',
-                          tempfile.gettempdir()) 
+DATA_DIR = os.environ.get('CASTRO_DATA_DIR', None) or tempfile.gettempdir()
 
 class Castro:
-    def __init__(s, 
+    def __init__(s,
                  filename = "castro-video.swf",
                  host     = "localhost",
                  display  = 0,
@@ -39,7 +38,7 @@ class Castro:
         s.init()
 
     def init(s):
-        args=['lib/pyvnc2swf/vnc2swf.py', 
+        args=['lib/pyvnc2swf/vnc2swf.py',
                '-n',
                '-o', s.filepath,
                '%s:%s' % (s.host, s.display) ]
@@ -97,7 +96,7 @@ class Castro:
     def cuepoint(s):
         print "\n\nCreating cuepoints:"
         # Create the cuepoints file
-        cuefile = open(s.cuefilepath,'w') 
+        cuefile = open(s.cuefilepath,'w')
 
         # Write the header
         cuefile.write ("<?xml version=\"1.0\"?>\n")
