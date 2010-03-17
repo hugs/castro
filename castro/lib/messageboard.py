@@ -15,7 +15,7 @@ class MessageBoard:
 
     def write(self, writable):
         file = open(self.filepath,'w')
-        writable_json = json.dumps(writable, indent=4) 
+        writable_json = json.dumps(writable, indent=4)
         file.write(writable_json)
         file.close()
         return None
