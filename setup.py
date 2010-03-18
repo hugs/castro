@@ -119,9 +119,9 @@ Changelog:
 
 install_requires = [
           # -*- Extra requirements: -*-
+          'PyYAML',
           'pygame',
           'setuptools',
-          'PyYAML',
 ]
 
 # Python < 2.5 need some more
