@@ -20,6 +20,7 @@ class Castro:
                  display  = 0,
                  framerate = 12,
                  clipping = None,
+                 port = None,
                  passwd   = os.path.join(os.path.expanduser("~"), ".vnc", "passwd")):
         self.filename = filename
         self.filepath = os.path.join(DATA_DIR, self.filename)
@@ -28,6 +29,7 @@ class Castro:
         self.framerate = framerate
         self.clipping = clipping
         self.passwd = passwd
+        self.port = port
         
         # Post-process data: 
         self.duration = 0        
@@ -57,6 +59,9 @@ class Castro:
         if self.clipping:
             args.insert(4, '-C')
             args.insert(5, self.clipping)
+
+        if self.port:
+            args.append(str(self.port))
 
         self.recorder = Process(target= vnc2swf.main, args=[args])
 
