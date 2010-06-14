@@ -85,6 +85,12 @@ class Castro:
         self.cleanup()
 
     def keyframe(self):
+        """
+        Add keyframes - 1 per second (or every 12 frames)
+        Note: The output *needs* to have a different name than the original
+        The tip for adding the "-g" flag: http://www.infinitecube.com/?p=9
+        """
+
         print "Running ffmpeg: creating keyframes"
         os.system("ffmpeg -y -i %s -g %s -sameq %s" %
           (self.filepath,
