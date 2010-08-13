@@ -608,7 +608,7 @@ def main(argv):
     vnc2swf(info, outtype, host, port,
             preferred_encoding=preferred_encoding,
             subprocess=subprocess, pwdfile=pwdfile, vncfile=vncfile,
-            merge=merge, debug=debug, reconnect=reconnect
+            merge=merge, debug=debug, reconnect=reconnect)
   else:
     tempdir = os.path.join(tempfile.gettempdir(), 'pyvnc2swf')
     try:
