@@ -43,6 +43,7 @@ class Castro:
         args=['lib/pyvnc2swf/vnc2swf.py',
                '-n',
                '-o', self.filepath,
+               '-R', 3,
                '%s:%s' % (self.host, self.display) ]
 
         # If password file is specified, insert it into args

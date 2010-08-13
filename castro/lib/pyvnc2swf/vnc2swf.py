@@ -396,7 +396,7 @@ class VNC2SWFWithTk:
 ##
 def vnc2swf(info, outtype='swf5', host='localhost', port=5900, 
             preferred_encoding=(0,), subprocess=None, pwdfile=None, vncfile=None,
-            debug=0, merge=False):
+            debug=0, merge=False, reconnect=0):
   fp = None
   if outtype == 'vnc':
     stream = None
@@ -424,14 +424,23 @@ def vnc2swf(info, outtype='swf5', host='localhost', port=5900,
     print >>stderr, 'start recording'
   if subprocess:
     subprocess.start()
-  try:
-    client.loop()
-  except KeyboardInterrupt:
-    pass
-  except socket.error, e:
-    print >>stderr, 'Socket error:', e
-  except RFBError, e:
-    print >>stderr, 'RFB error:', e
+  for i in range(reconnect + 1)[::-1]:
+    try:
+      client.loop()
+    except KeyboardInterrupt:
+      break
+    except socket.error, e:
+      print >>stderr, 'Socket error:', e
+      if i:
+        time.sleep(1)
+        client.init().auth().start()
+    except RFBError, e:
+      print >>stderr, 'RFB error:', e
+      if i:
+        time.sleep(1)
+        client.init().auth().start()
+    else:
+      break
   if debug:
     print >>stderr, 'stop recording'
   if subprocess:
@@ -527,7 +536,7 @@ def main(argv):
            ' [-S subprocess] [-P pwdfile] [host[:display] [port]]' % argv[0])
     return 100
   try:
-    (opts, args) = getopt.getopt(argv[1:], 'dno:t:e:NC:r:S:P:s:zmaV')
+    (opts, args) = getopt.getopt(argv[1:], 'dno:t:e:NC:r:S:P:s:zmaVR:')
   except getopt.GetoptError:
     return usage()
   (debug, console, outtype, subprocess, merge, pwdfile, isfile) = (0, False, None, None, False, None, False)
@@ -546,6 +555,8 @@ def main(argv):
     elif k == '-V': isfile = True
     elif k == '-o':
       info.filename = v
+    elif k == '-R':
+      reconnect = v
     elif k == '-C':
       try:
         info.set_clipping(v)
@@ -597,7 +608,7 @@ def main(argv):
     vnc2swf(info, outtype, host, port,
             preferred_encoding=preferred_encoding,
             subprocess=subprocess, pwdfile=pwdfile, vncfile=vncfile,
-            merge=merge, debug=debug)
+            merge=merge, debug=debug, reconnect=reconnect)
   else:
     tempdir = os.path.join(tempfile.gettempdir(), 'pyvnc2swf')
     try:
